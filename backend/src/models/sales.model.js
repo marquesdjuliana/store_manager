@@ -3,21 +3,22 @@ const connection = require('./connection');
 
 const findAllSales = async () => {
   const [sales] = await connection.execute(
-    'SELECT s.id AS saleId, s.date, sp.product_id AS productId, sp.quantity '
-    + 'FROM sales s '
-    + 'JOIN sales_products sp ON s.id = sp.sale_id '
-    + 'ORDER BY saleId, productId',
+    `SELECT sale_id, 
+    date, product_id, quantity FROM sales_products 
+    INNER JOIN sales s
+    ON s.id = sale_id 
+    ORDER BY sale_id, product_id`,
   );
   return camelize(sales);
 };
 
 const findSaleById = async (saleId) => {
   const [sale] = await connection.execute(
-    'SELECT s.id AS saleId, s.date, sp.product_id AS productId, sp.quantity '
-    + 'FROM sales s '
-    + 'JOIN sales_products sp ON s.id = sp.sale_id '
-    + 'WHERE s.id = ? '
-    + 'ORDER BY productId',
+    `SELECT date, product_id, quantity FROM sales_products 
+    INNER JOIN sales s
+    ON s.id = sale_id 
+    WHERE id = ?
+    ORDER BY product_id`,
     [saleId],
   );
   return camelize(sale);
