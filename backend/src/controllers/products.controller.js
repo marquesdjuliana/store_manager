@@ -1,6 +1,6 @@
 const { productsService } = require('../services');
 const mapStatusHTTP = require('../utils/mapStatusHTTP');
-
+ 
 const listAllProducts = async (_req, res) => {
   const { status, data } = await productsService.listAllProducts();
   return res.status(mapStatusHTTP(status)).json(data);
@@ -11,7 +11,15 @@ const getProductsById = async (req, res) => {
   const { status, data } = await productsService.getProductsId(id);
   return res.status(mapStatusHTTP(status)).json(data);
 };
+
+const createProduct = async (req, res) => {
+  const { name } = req.body;
+
+  const result = await productsService.createProduct(name);
+  return res.status(mapStatusHTTP(result.status)).json(result.data);
+};
 module.exports = {
   listAllProducts,
   getProductsById,
+  createProduct,
 };

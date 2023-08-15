@@ -13,7 +13,16 @@ const getProductsId = async (productId) => {
   return { status: 'SUCCESSFUL', data: product };
 };
 
+const createProduct = async (productName) => {
+  const result = await productsModel.createProduct(productName);
+  if (result.status === 'CREATED') {
+    return { status: 'CREATED', data: { id: result.data.insertId, name: productName } };
+  } 
+    return { status: 'ERROR', data: { message: 'Failed to create product' } };
+};
+
 module.exports = {
   listAllProducts,
   getProductsId,
+  createProduct,
 };
