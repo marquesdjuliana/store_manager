@@ -1,7 +1,7 @@
 const { productsService } = require('../services');
 const mapStatusHTTP = require('../utils/mapStatusHTTP');
 
-const listAllProducts = async (req, res) => {
+const listAllProducts = async (_req, res) => {
   const { status, data } = await productsService.listAllProducts();
   return res.status(mapStatusHTTP(status)).json(data);
 };
