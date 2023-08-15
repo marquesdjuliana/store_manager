@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const { listAllSales, getSaleById } = require('../../../src/services/sales.service');
 const { salesModel } = require('../../../src/models');
-const { allSalesData, specificSaleData, allSalesResponse, specificSaleResponse } = require('../mocks/sales.mock');
+const { allSales, specificSale, allSalesResponse, specificSaleResponse } = require('../mocks/sales.mock');
 
 describe('Sales Service Tests:', function () {
   afterEach(function () {
@@ -11,7 +11,7 @@ describe('Sales Service Tests:', function () {
   });
 
   it('Tests whether all sales are retrieved correctly', async function () {
-    sinon.stub(salesModel, 'findAllSales').resolves(allSalesData);
+    sinon.stub(salesModel, 'findAllSales').resolves(allSales);
 
     const result = await listAllSales();
     expect(result).to.deep.equal(allSalesResponse);
@@ -19,7 +19,7 @@ describe('Sales Service Tests:', function () {
 
   it('Tests whether a single sale is retrieved correctly', async function () {
     const saleId = 1;
-    sinon.stub(salesModel, 'findSaleById').withArgs(saleId).resolves(specificSaleData);
+    sinon.stub(salesModel, 'findSaleById').withArgs(saleId).resolves(specificSale);
 
     const result = await getSaleById(saleId);
     expect(result).to.deep.equal(specificSaleResponse);

@@ -1,4 +1,4 @@
-const allSalesData = [
+const allSales = [
   {
     saleId: 1,
     date: '2021-09-09T04:54:29.000Z',
@@ -19,7 +19,7 @@ const allSalesData = [
   },
 ];
 
-const specificSaleData = [
+const specificSale = [
   {
     date: '2021-09-09T04:54:29.000Z',
     productId: 1,
@@ -34,17 +34,17 @@ const specificSaleData = [
 
 const allSalesResponse = {
   status: 'SUCCESSFUL',
-  data: allSalesData,
+  data: allSales,
 };
 
 const specificSaleResponse = {
   status: 'SUCCESSFUL',
-  data: specificSaleData,
+  data: specificSale,
 };
 
 module.exports = {
-  allSalesData,
-  specificSaleData,
+  allSales,
+  specificSale,
   allSalesResponse,
   specificSaleResponse,
 };

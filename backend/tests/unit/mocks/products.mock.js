@@ -1,4 +1,4 @@
-const productsFromDB = [
+const allProducts = [
   {
     id: 1,
     name: 'Martelo de Thor',
@@ -13,18 +13,18 @@ const productsFromDB = [
   },
 ];
 
-const productFomDB = {
+const specificProduct = {
   id: 1,
   name: 'Martelo de Thor',
 };
 
-const productFromService = { 
+const productResponse = { 
   status: 'SUCCESSFUL',
-  data: productsFromDB,
+  data: allProducts,
 };
 
 module.exports = {
-  productsFromDB,
-  productFomDB,
-  productFromService,
+  allProducts,
+  specificProduct,
+  productResponse,
 };

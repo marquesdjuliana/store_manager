@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
-const { productsFromDB, productFromDB } = require('../mocks/products.mock');
+const { allProducts, productFromDB } = require('../mocks/products.mock');
 
 describe('Products Service Tests:', function () {
   afterEach(function () {
@@ -10,12 +10,12 @@ describe('Products Service Tests:', function () {
   });
 
   it('Tests whether to return all products successfully', async function () {
-    sinon.stub(productsModel, 'findAll').resolves(productsFromDB);
+    sinon.stub(productsModel, 'findAll').resolves(allProducts);
     
     const result = await productsService.listAllProducts();
 
     expect(result.status).to.equal('SUCCESSFUL');
-    expect(result.data).to.deep.equal(productsFromDB);
+    expect(result.data).to.deep.equal(allProducts);
   });
 
   it('Tests whether to return product by id successfully', async function () {

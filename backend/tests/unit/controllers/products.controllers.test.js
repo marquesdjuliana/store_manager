@@ -1,7 +1,7 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
-const { productsFromDB, productFromService } = require('../mocks/products.mock');
+const { allProducts, productResponse } = require('../mocks/products.mock');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -15,7 +15,7 @@ describe('Products Controller Tests:', function () {
   });
 
   it('Tests whether to product list return with status 200', async function () {
-    sinon.stub(productsService, 'listAllProducts').resolves(productFromService);
+    sinon.stub(productsService, 'listAllProducts').resolves(productResponse);
     const res = {
       status: sinon.stub().returnsThis(),
       json: sinon.stub(),
@@ -23,11 +23,11 @@ describe('Products Controller Tests:', function () {
 
     await productsController.listAllProducts({}, res);
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(productsFromDB);
+    expect(res.json).to.have.been.calledWith(allProducts);
   });
 
   it('Tests whether to return of a product with status 200', async function () {
-    sinon.stub(productsService, 'getProductsId').resolves(productFromService);
+    sinon.stub(productsService, 'getProductsId').resolves(productResponse);
   
     const req = {
       params: { productId: 1 },
@@ -40,7 +40,7 @@ describe('Products Controller Tests:', function () {
   
     await productsController.getProductsById(req, res);
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(productFromService.data);
+    expect(res.json).to.have.been.calledWith(productResponse.data);
   });
 
   it('Tests whether product not found should return with status 404', async function () {
