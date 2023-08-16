@@ -1,9 +1,17 @@
+// const verifyRequiredFields = require('../utils/verifyRequiredFields');
+const mapStatusHTTP = require('../utils/mapStatusHTTP');
+const verifyRequiredFields = require('../utils/verifyRequiredFields');
+
 const validateProduct = (req, res, next) => {
-  const { name } = req.body;
-  if (!name) {
-    return res.status(400).json({ message: 'Product name is required' });
+  const { body } = req;
+  const requiredFields = ['name'];
+
+  const error = verifyRequiredFields(body, requiredFields);
+  if (error) {
+    return res.status(mapStatusHTTP('INVALID_REQUEST')).json({ message: error });
   }
-  next();
+
+  return next();
 };
 
 module.exports = validateProduct;

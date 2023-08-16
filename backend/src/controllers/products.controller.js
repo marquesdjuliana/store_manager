@@ -13,9 +13,8 @@ const getProductsById = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const { name } = req.body;
-
-  const result = await productsService.createProduct(name);
+  const newProduct = req.body;
+  const result = await productsService.createProduct(newProduct);
   return res.status(mapStatusHTTP(result.status)).json(result.data);
 };
 module.exports = {
