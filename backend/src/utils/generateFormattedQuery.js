@@ -9,7 +9,7 @@ const getFormattedPlaceholders = (object) => {
   if (Array.isArray(object)) {
     return object.map((obj) => `(${Object.keys(obj).map(() => '?').join(',')})`).join(',');
   }
-  return `(${Object.keys(object).map(() => '?').join(',')})`;
+  return `${Object.keys(object).map(() => '?').join(',')}`;
 };
 
 const getFormattedUpdateColumns = (object) => Object.keys(snakeize(object))

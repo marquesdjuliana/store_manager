@@ -1,4 +1,3 @@
-// const verifyRequiredFields = require('../utils/verifyRequiredFields');
 const mapStatusHTTP = require('../utils/mapStatusHTTP');
 const verifyRequiredFields = require('../utils/verifyRequiredFields');
 
