@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
-const { allProducts, productFromDB } = require('../mocks/products.mock');
+const { allProducts, productFromDB, createdProduct } = require('../mocks/products.mock');
 
 describe('Products Service Tests:', function () {
   afterEach(function () {
@@ -36,5 +36,20 @@ describe('Products Service Tests:', function () {
 
     expect(result.status).to.equal('NOT_FOUND');
     expect(result.data.message).to.equal('Product not found');
+  });
+
+  it('Tests whether Creates a new product successfully and returns the created product', async function () {
+    sinon.stub(productsModel, 'createProduct').resolves(4);
+    sinon.stub(productsModel, 'findById').resolves(createdProduct);
+
+    const newProduct = {
+      name: 'New product created',
+    };
+
+    const creationResponse = await productsService.createProduct(newProduct);
+
+    expect(creationResponse.data).to.be.an('object');
+    expect(creationResponse.data).to.be.deep.equal(createdProduct);
+    expect(creationResponse.status).to.be.equal('CREATED');
   });
 });

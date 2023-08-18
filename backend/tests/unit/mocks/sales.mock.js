@@ -42,9 +42,24 @@ const specificSaleResponse = {
   data: specificSale,
 };
 
+const insertedSaleId = { insertId: 10 };
+const sampleProducts = {
+  body: [
+    {
+      productId: 1,
+      quantity: 1,
+    },
+    {
+      productId: 2,
+      quantity: 5,
+    },
+  ],
+};
 module.exports = {
   allSales,
   specificSale,
   allSalesResponse,
   specificSaleResponse,
+   insertedSaleId,
+   sampleProducts,
 };

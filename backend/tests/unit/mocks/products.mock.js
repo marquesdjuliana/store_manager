@@ -22,9 +22,13 @@ const productResponse = {
   status: 'SUCCESSFUL',
   data: allProducts,
 };
-
+const createdProduct = {
+  id: 4,
+  name: 'New product created',
+};
 module.exports = {
   allProducts,
   specificProduct,
   productResponse,
+  createdProduct,
 };
