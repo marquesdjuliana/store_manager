@@ -44,4 +44,4 @@ describe('validateProduct Middleware Tests:', function () {
     await validateProduct(req, res, next);
     expect(next).to.have.been.calledWith();
   });
-}); // teste
+});
