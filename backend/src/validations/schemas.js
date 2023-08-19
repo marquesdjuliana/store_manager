@@ -6,8 +6,8 @@ const productSchema = Joi.object({
 
 const salesSchema = Joi.array().items(
   Joi.object({
-    productId: Joi.number().integer().required(),
-    quantity: Joi.number().integer().required(),
+    productId: Joi.number().integer().min(1).required(),
+    quantity: Joi.number().integer().min(1).required(),
   }),
 );
 

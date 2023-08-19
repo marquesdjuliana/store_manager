@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const { listAllSales, getSaleById } = require('../../../src/services/sales.service');
-const { salesModel } = require('../../../src/models');
+const { listAllSales, getSaleById, createCompleteSale } = require('../../../src/services/sales.service');
+const { salesModel, productsModel } = require('../../../src/models');
 const { allSales, specificSale, allSalesResponse, specificSaleResponse } = require('../mocks/sales.mock');
 
 describe('Sales Service Tests:', function () {
@@ -31,5 +31,17 @@ describe('Sales Service Tests:', function () {
 
     const result = await getSaleById(nonExistingSaleId);
     expect(result).to.deep.equal({ status: 'NOT_FOUND', data: { message: 'Sale not found' } });
+  });
+  it('Tests whether creating a sale with non-existing products returns "Product not found"', async function () {
+    const nonExistingProductId = 100;
+    const productsSold = [
+      { productId: nonExistingProductId, quantity: 2 },
+      { productId: 2, quantity: 3 },
+    ];
+  
+    sinon.stub(productsModel, 'findById').resolves(null);
+  
+    const result = await createCompleteSale(productsSold);
+    expect(result).to.deep.equal({ status: 'NOT_FOUND', data: { message: 'Product not found' } });
   });
 });
