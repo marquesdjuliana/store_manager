@@ -35,4 +35,6 @@ const validateSale = [validateProductId, validateQuantity];
 
 module.exports = {
    validateSale,
+   validateProductId,
+   validateQuantity,
 };
